@@ -64,7 +64,7 @@
                           <td><?php echo $index + 1; ?></td>
                           <td><?php echo htmlspecialchars($reserva['servicio']); ?></td>
                           <td><?php echo htmlspecialchars($reserva['destino_final']); ?></td>
-                          <td><?php echo htmlspecialchars($reserva['personas']); ?></td>
+                          <td><?php echo htmlspecialchars($reserva['personas'] ?? 'Paquete'); ?></td>
                           <td><?php echo htmlspecialchars($reserva['fecha_inicio']); ?></td>
                           <td>
                             <span class="badge bg-<?php echo $reserva['estado'] == 'confirmado' ? 'success' : ($reserva['estado'] == 'pendiente' ? 'warning' : 'secondary'); ?>">

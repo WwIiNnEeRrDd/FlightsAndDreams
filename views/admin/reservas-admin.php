@@ -77,7 +77,7 @@
                                 <td class="text-center"><?php echo !empty($reserva['nombre_paquete']) ? htmlspecialchars($reserva['nombre_paquete']) : 'No disponible'; ?></td>
                                 <td class="text-center"><?php echo htmlspecialchars($reserva['servicio']); ?></td>
                                 <td class="text-center"><?php echo htmlspecialchars($reserva['destino_final']); ?></td>
-                                <td class="text-center"><?php echo htmlspecialchars($reserva['personas']); ?></td>
+                                <td class="text-center"><?php echo htmlspecialchars($reserva['personas'] ?? 'Paquete'); ?></td>
                                 <td class="text-center"><?php echo htmlspecialchars($reserva['fecha_inicio']); ?></td>
                                 <td class="text-center">
                                   <span class="badge bg-<?php echo $reserva['estado'] == 'confirmado' ? 'success' : ($reserva['estado'] == 'pendiente' ? 'warning' : 'secondary'); ?>">
