@@ -4,21 +4,24 @@ require_once '../models/Admin.php';
 require_once '../config/config.php';
 
 class ViajesController {
+    private $viajesModel;
 
+    public function __construct() {
+        $this->viajesModel = new Viajes();
+    }
 
     public function reservar() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             session_start();
             verificarSesion();
-            
+
             $userId = $_SESSION['usuario'];
-            // Obtener los datos del formulario
             $id_usuario = $userId;
             $id_paquete = $_POST['id_paquete'] ?? null;
             $destino_final = $_POST['destino_final'];
             $destino_origen = $_POST['destino_origen'] ?? null;
             $estado = $_POST['estado'] ?? 'pendiente';
-            $personas = $_POST['personas' ?? null];
+            $personas = $_POST['personas'] ?? null;
             $fecha_inicio = $_POST['fecha_inicio'];
             $fecha_final = $_POST['fecha_final'] ?? null;
             $visa = $_POST['visa'] ?? null;
@@ -28,23 +31,25 @@ class ViajesController {
             $clase_vuelo = $_POST['clase_vuelo'] ?? null;
             $clase_tren = $_POST['clase_tren'] ?? null;
 
-            // Validar los datos (puedes agregar más validaciones)
-            if (!empty($destino_final) && !empty($estado) && !empty($fecha_inicio) && !empty($servicio)) {
-                // Instanciar el modelo
-                $viajesModel = new Viajes();
+            // Verificar fechas
+            if (strtotime($fecha_inicio) >= strtotime($fecha_final)) {
+                setcookie('fecha_incorrecta_servicios', 'Fechas incorrectas. La fecha de inicio debe ser antes que la de final.', time() + 3600, '/');
+                header('Location: ' . BASE_URL . "paquetes/listarPorServicio/" . $servicio);
+                exit();
+            }
 
-                // Llamar al método del modelo para crear el viaje
-                $resultado = $viajesModel->crearViaje(
-                    $id_usuario, $id_paquete, $destino_final, $destino_origen, $estado, $personas, 
+            // Validar datos obligatorios
+            if (!empty($destino_final) && !empty($estado) && !empty($fecha_inicio) && !empty($servicio)) {
+                $resultado = $this->viajesModel->crearViaje(
+                    $id_usuario, $id_paquete, $destino_final, $destino_origen, $estado, $personas,
                     $fecha_inicio, $fecha_final, $visa, $servicio, $tipo_autobus, $tipo_habitacion, $clase_vuelo, $clase_tren
                 );
 
                 if ($resultado) {
-                    // Redirigir al usuario a la lista de viajes o a la página de éxito
-                    header('Location: ../config/routes.php?controller=viajes&action=verReservas');
+                    header('Location: ' . BASE_URL . 'viajes/verReservas');
                     exit();
                 } else {
-                    echo "Hubo un error al crear el viaje";
+                    echo "Hubo un error al crear el viaje.";
                 }
             } else {
                 echo "Por favor complete todos los campos obligatorios.";
@@ -52,44 +57,31 @@ class ViajesController {
         }
     }
 
-    public function verReservas() {
+    public function verReservas($estado) {
         session_start();
         if (isset($_SESSION['usuario'])) {
-
-            $viajesModel = new Viajes();
-            $estado = isset($_GET['estado']) ? $_GET['estado'] : '';
-
             $userId = $_SESSION['usuario'];
-            $reservas = $viajesModel->verReservas($userId, $estado);
+            $reservas = $this->viajesModel->verReservas($userId, $estado);
 
-            // Incluye la vista y pasa las reservas como parámetro
             require_once "../views/viajes/reservas.php";
         } else {
-            // Redirigir al login si no está logueado
             header("Location: " . BASE_URL . "views/usuarios/login.php");
-            exit;
+            exit();
         }
     }
 
-    public function actualizarEstado()
-    {
-        if (isset($_POST['id_viajes'])) {
+    public function actualizarEstado() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_viajes'])) {
             $idViajes = $_POST['id_viajes'];
 
-            $viajeModel = new Viajes();
-            $resultado = $viajeModel->actualizarEstado($idViajes, "cancelado");
+            $resultado = $this->viajesModel->actualizarEstado($idViajes, "cancelado");
 
             if ($resultado) {
-                // Redirige a la lista de viajes con un mensaje de éxito
-                header('Location: ../config/routes.php?controller=viajes&action=verReservas');
-                
+                header('Location: ' . BASE_URL . 'viajes/verReservas');
             } else {
-                // Redirige con un mensaje de error
-                echo "ERROR";
+                echo "ERROR al actualizar el estado.";
             }
         }
     }
-    
 }
-
 ?>

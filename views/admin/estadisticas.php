@@ -42,7 +42,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Figtree:ital,wght@0,300..900;1,300..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
     <!-- CSS -->
-    <link rel="stylesheet" href="../../public/css/style.css" />
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>public/css/style.css" />
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
     <!-- Iconos: Font-Awesome -->
@@ -141,7 +141,13 @@
                     <div class="card text-white bg-success h-100">
                         <div class="card-body">
                             <h3 class="card-title">Paquete Más Vendido</h3>
-                            <p class="card-text fs-5"><?php  echo $paqueteMasVendido["Nombre"] . " con " . $paqueteMasVendido["total_vendidos"] . " ventas."; ?></p>
+                            <p class="card-text fs-5">
+                            <?php 
+                                echo !empty($paqueteMasVendido) 
+                                    ? $paqueteMasVendido["Nombre"] . " con " . $paqueteMasVendido["total_vendidos"] . " ventas."
+                                    : "No hay paquetes"; // En caso de que el array esté vacío
+                                ?>
+                            </p>
                         </div>
                     </div>
                 </div>

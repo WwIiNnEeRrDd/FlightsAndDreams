@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Figtree:ital,wght@0,300..900;1,300..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
     <!-- CSS -->
-    <link rel="stylesheet" href="../../public/css/style.css" />
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>public/css/style.css" />
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
     <!-- Iconos: Font-Awesome -->
@@ -28,10 +28,10 @@
         <div class="row d-flex justify-content-center align-items-center h-100">
           <div class="col-md-9 col-lg-6 col-xl-5">
             <!-- <img src="https://t3.ftcdn.net/jpg/05/27/24/36/360_F_527243669_mhBh7M6Xb9hxg0y2Ug87XfQrlX20suMU.jpg" class="img-fluid" alt="Sample image" /> -->
-            <img class="img-fluid" src="../../public/images/Flight-&-Dreams-LOGO-Traz.png" alt="" />
+            <img class="img-fluid" src="<?php echo BASE_URL; ?>public/images/Flight-&-Dreams-LOGO-Traz.png" alt="" />
           </div>
           <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-            <form method="POST" action="../../config/routes.php?controller=usuario&action=registrar">
+            <form method="POST" action="<?php echo BASE_URL; ?>usuario/registrar">
               <div>
                 <i class="fa-solid fa-circle-user fa-2x row d-flex justify-content-center align-items-center"></i>
                 <h1 class="row d-flex justify-content-center align-items-center p-1">Registrarse</h1>
@@ -82,14 +82,14 @@
                 
                 <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem">Registrarme</button>
 
-                <p class="small fw-bold mt-2 pt-1 mb-0">¿Ya tienes una cuenta? <a href="./login.php" class="link-danger">Inicia sesión</a></p>
+                <p class="small fw-bold mt-2 pt-1 mb-0">¿Ya tienes una cuenta? <a href="login" class="link-danger">Inicia sesión</a></p>
               </div>
             </form>
           </div>
         </div>
       </div>
       <div class="d-flex justify-content-center align-items-center">
-        <a href="<?php echo BASE_URL; ?>public/index.php">
+        <a href="<?php echo BASE_URL; ?>inicio">
           <button type="submit" class="button"> <i class="fa-solid fa-arrow-left pe-3"></i> Volver atrás</button>
         </a>  
       </div>

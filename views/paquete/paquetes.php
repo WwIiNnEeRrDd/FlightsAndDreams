@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Figtree:ital,wght@0,300..900;1,300..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
     <!-- CSS -->
-    <link rel="stylesheet" href="../public/css/style.css" />
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>public/css/style.css" />
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
     <!-- Iconos: Font-Awesome -->
@@ -33,12 +33,12 @@
 
     <!-- Filtro de estado -->
     <div class="d-flex justify-content-start mb-3">
-        <a href="?controller=paquete&action=listar&servicio=" class="btn btn-primary me-2">Ver Todas</a>
-        <a href="?controller=paquete&action=listarPorServicioPaquetes&servicio=autobuses" class="btn btn-warning me-2">Autobuses</a>
-        <a href="?controller=paquete&action=listarPorServicioPaquetes&servicio=hoteles" class="btn btn-success me-2">Hoteles</a>
-        <a href="?controller=paquete&action=listarPorServicioPaquetes&servicio=cruceros" class="btn btn-primary me-2">Cruceros</a>
-        <a href="?controller=paquete&action=listarPorServicioPaquetes&servicio=trenes" class="btn btn-warning me-2">Trenes</a>
-        <a href="?controller=paquete&action=listarPorServicioPaquetes&servicio=vuelos" class="btn btn-success me-2">Vuelos</a>
+        <a href="<?php echo BASE_URL; ?>paquetes/listar" class="btn btn-primary me-2">Ver Todas</a>
+        <a href="<?php echo BASE_URL; ?>paquetes/listarPorServicioPaquetes/autobuses" class="btn btn-warning me-2">Autobuses</a>
+        <a href="<?php echo BASE_URL; ?>paquetes/listarPorServicioPaquetes/hoteles" class="btn btn-success me-2">Hoteles</a>
+        <a href="<?php echo BASE_URL; ?>paquetes/listarPorServicioPaquetes/cruceros" class="btn btn-primary me-2">Cruceros</a>
+        <a href="<?php echo BASE_URL; ?>paquetes/listarPorServicioPaquetes/trenes" class="btn btn-warning me-2">Trenes</a>
+        <a href="<?php echo BASE_URL; ?>paquetes/listarPorServicioPaquetes/vuelos" class="btn btn-success me-2">Vuelos</a>
 
     </div>
     
@@ -55,7 +55,7 @@
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
                     <?php if (!empty($paquete['Foto'])): ?>
-                        <img src="../controllers/ImagenController.php?id=<?= $paquete['id_paquete'] ?>" alt="Imagen del Paquete" class="card-img-top">
+                        <img src="<?php echo BASE_URL; ?>controllers/ImagenController.php?id=<?= $paquete['id_paquete'] ?>" alt="Imagen del Paquete" class="card-img-top">
                     <?php else: ?>
                         <img src="<?php echo BASE_URL; ?>public/images/paquete-bro.jpg" alt="Imagen Predeterminada" class="card-img-top">
                     <?php endif; ?>
@@ -72,7 +72,7 @@
                             </p>
                         </div>
                         <div class="card-footer">
-                            <a href="../config/routes.php?controller=paquete&action=verPaquete&id_paquete=<?php echo $paquete['id_paquete']; ?>"><button type="button" class="btn btn-success">Ver itinerario</button></a>
+                            <a href="<?php echo BASE_URL; ?>paquetes/verPaquete/<?php echo $paquete['id_paquete']; ?>"><button type="button" class="btn btn-success">Ver itinerario</button></a>
                         </div>
                     </div>
                 </div>

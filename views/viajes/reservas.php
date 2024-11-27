@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300..900&family=Inter:wght@100..900&display=swap" rel="stylesheet">
   <!-- CSS -->
-  <link rel="stylesheet" href="../public/css/style.css">
+  <link rel="stylesheet" href="<?php echo BASE_URL; ?>public/css/style.css">
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <!-- Iconos: Font-Awesome -->
@@ -36,10 +36,10 @@
 
           <!-- Filtro de estado -->
           <div class="d-flex justify-content-start mb-3">
-            <a href="?controller=viajes&action=verReservas&estado=" class="btn btn-primary me-2">Ver Todas</a>
-            <a href="?controller=viajes&action=verReservas&estado=pendiente" class="btn btn-warning me-2">Pendientes</a>
-            <a href="?controller=viajes&action=verReservas&estado=confirmado" class="btn btn-success me-2">Confirmadas</a>
-            <a href="?controller=viajes&action=verReservas&estado=cancelado" class="btn btn-secondary">Canceladas</a>
+            <a href="<?php echo BASE_URL; ?>viajes/verReservas" class="btn btn-primary me-2">Ver Todas</a>
+            <a href="<?php echo BASE_URL; ?>viajes/verReservas/pendiente" class="btn btn-warning me-2">Pendientes</a>
+            <a href="<?php echo BASE_URL; ?>viajes/verReservas/confirmado" class="btn btn-success me-2">Confirmadas</a>
+            <a href="<?php echo BASE_URL; ?>viajes/verReservas/cancelado" class="btn btn-secondary">Canceladas</a>
           </div>
 
           <div class="card mt-5">
@@ -73,7 +73,7 @@
                           </td>
                           <td>
                             <?php if ($reserva['estado'] !== 'cancelado'): ?>
-                                <form method="POST" class="d-flex align-items-center justify-content-center" action="../config/routes.php?controller=viajes&action=actualizarEstado">
+                                <form method="POST" class="d-flex align-items-center justify-content-center" action="<?php echo BASE_URL; ?>viajes/actualizarEstado">
                                     <input type="hidden" name="id_viajes" value="<?php echo $reserva['id_viajes']; ?>">
                                     <button type="submit" class="btn btn-primary btn-sm text-white d-flex align-items-center">
                                         <i class="fa-solid fa-trash me-2"></i> 

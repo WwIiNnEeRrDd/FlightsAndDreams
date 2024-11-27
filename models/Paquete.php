@@ -40,18 +40,21 @@
             $query = "INSERT INTO paquete (nombre, descripcion, destino, precio, foto, fecha_inicio, fecha_final, servicio, itinerario) 
                       VALUES (:nombre, :descripcion, :destino, :precio, :foto, :fecha_inicio, :fecha_final, :servicio, :itinerario)";
             $stmt = $this->conexion->prepare($query);
-
+        
             // Vincula los parámetros
             $stmt->bindParam(':nombre', $datos['nombre']);
             $stmt->bindParam(':descripcion', $datos['descripcion']);
             $stmt->bindParam(':destino', $datos['destino']);
             $stmt->bindParam(':precio', $datos['precio']);
             
-            // Aquí nos aseguramos de que la imagen esté correctamente convertida a un blob
-            if (isset($datos['foto']) && is_string($datos['foto'])) {
+            // Verificar si 'foto' está en los datos y no es null
+            if (isset($datos['foto']) && $datos['foto'] !== null) {
                 $stmt->bindParam(':foto', $datos['foto'], PDO::PARAM_LOB);
+            } else {
+                // Asignar null a 'foto' si no está presente o es null
+                $stmt->bindValue(':foto', null, PDO::PARAM_NULL);
             }
-            
+        
             $stmt->bindParam(':fecha_inicio', $datos['fecha_inicio']);
             $stmt->bindParam(':fecha_final', $datos['fecha_final']);
             $stmt->bindParam(':servicio', $datos['servicio']);
@@ -59,8 +62,7 @@
             
             // Ejecuta la consulta
             return $stmt->execute();
-        }
-
+        } 
 
         public function getPaqueteMasVendido() {
             // Consulta SQL para obtener el paquete más vendido
@@ -82,18 +84,80 @@
             if ($row !== false && !empty($row)) {
                 return $row; // Retornar el paquete más vendido
             } else {
-                return null;
+                return [];
             }
         }
         
 
         public function getPaqueteById($id_paquete) {
-            $sql = "SELECT * FROM Paquete WHERE id_paquete = :id_paquete";
+            $sql = "SELECT * FROM paquete WHERE id_paquete = :id_paquete";
             $stmt = $this->conexion->prepare($sql);
             $stmt->bindParam(':id_paquete', $id_paquete, PDO::PARAM_INT);
             $stmt->execute();
             return $stmt->fetch(PDO::FETCH_ASSOC);
         }
+
+        public function actualizarPaquete($datos) {
+            $sql = "UPDATE paquete SET 
+                        nombre = :nombre,
+                        descripcion = :descripcion,
+                        destino = :destino,
+                        precio = :precio,
+                        foto = :foto,
+                        fecha_inicio = :fecha_inicio,
+                        fecha_final = :fecha_final,
+                        servicio = :servicio,
+                        itinerario = :itinerario
+                    WHERE id_paquete = :id_paquete";
+        
+            $stmt = $this->conexion->prepare($sql);
+        
+            $stmt->bindParam(':nombre', $datos['nombre']);
+            $stmt->bindParam(':descripcion', $datos['descripcion']);
+            $stmt->bindParam(':destino', $datos['destino']);
+            $stmt->bindParam(':precio', $datos['precio']);
+            $stmt->bindParam(':foto', $datos['foto'], PDO::PARAM_LOB);
+            $stmt->bindParam(':fecha_inicio', $datos['fecha_inicio']);
+            $stmt->bindParam(':fecha_final', $datos['fecha_final']);
+            $stmt->bindParam(':servicio', $datos['servicio']);
+            $stmt->bindParam(':itinerario', $datos['itinerario']);
+            $stmt->bindParam(':id_paquete', $datos['id_paquete'], PDO::PARAM_INT);
+        
+            return $stmt->execute();
+        }
+
+        public function getFotoPaqueteById($id_paquete) {
+            // Consulta SQL para obtener la imagen del paquete
+            $sql = "SELECT foto FROM paquete WHERE id_paquete = :id_paquete";
+            
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bindParam(':id_paquete', $id_paquete, PDO::PARAM_INT);
+            $stmt->execute();
+            
+            // Verificamos si se encontró el paquete
+            if ($stmt->rowCount() > 0) {
+                // Devolver la imagen (como un blob)
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                return $row['foto'];
+            } else {
+                return null; // Si no se encuentra la foto, devolver null
+            }
+        }
+
+        public function eliminarPaquete($id_paquete) {
+            // Preparar la consulta SQL para eliminar el paquete
+            $sql = "DELETE FROM paquete WHERE id_paquete = :id_paquete";
+            
+            // Preparar la declaración SQL
+            $stmt = $this->conexion->prepare($sql);
+            
+            // Vincular el parámetro del ID del paquete
+            $stmt->bindParam(':id_paquete', $id_paquete, PDO::PARAM_INT);
+            
+            // Ejecutar la consulta y devolver el resultado (verdadero si se eliminó correctamente)
+            return $stmt->execute();
+        }
+        
         
     }
     

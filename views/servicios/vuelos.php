@@ -1,4 +1,5 @@
 <?php
+  ob_start(); // Inicia el buffer de salida
   require_once '../config/config.php';
 ?>
 
@@ -14,7 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Figtree:ital,wght@0,300..900;1,300..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
     <!-- CSS -->
-    <link rel="stylesheet" href="../public/css/style.css" />
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>public/css/style.css" />
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
     <!-- Iconos: Font-Awesome -->
@@ -32,7 +33,7 @@
       </div>
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src="../public/images/vuelos.webp" class="d-block w-100 h-30 imagenCotizar" alt="..." />
+          <img src="<?php echo BASE_URL; ?>public/images/vuelos.webp" class="d-block w-100 h-30 imagenCotizar" alt="..." />
         </div>
       </div>
     </section>
@@ -42,7 +43,18 @@
         <div class="bg-primary text-white p-3 mb-3">
           <h5 class="m-0">Rellena los detalles del viaje</h5>
         </div>
-        <form method="POST" action="../config/routes.php?controller=viajes&action=reservar">
+
+        <?php
+          // Verificar si la cookie existe y mostrar el mensaje
+          if (isset($_COOKIE['fecha_incorrecta_servicios'])) {
+              echo "<p class='alert alert-danger'>" . $_COOKIE['fecha_incorrecta_servicios'] . "</p>";
+
+              // Eliminar la cookie después de mostrar el mensaje
+              setcookie('fecha_incorrecta_servicios', '', time() - 3600, '/'); // Eliminar la cookie inmediatamente
+          }
+        ?>
+
+        <form method="POST" action="<?php echo BASE_URL; ?>viajes/reservar">
           <div class="row g-3 mb-3">
             <!-- Aeropuerto de origen -->
             <div class="col-md-3">
@@ -73,7 +85,7 @@
             <!-- Personas -->
             <div class="col-md-3">
               <label for="personas" class="form-label">Personas</label>
-              <input name="personas" type="number" id="personas" class="form-control" min="1" max="20" placeholder="Cantidad de personas" required/>
+              <input name="personas" type="number" id="personas" class="form-control" min="1" max="100" placeholder="Cantidad de personas" required/>
             </div>
 
             <!-- Clase del vuelo -->
@@ -148,7 +160,7 @@
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
                     <?php if (!empty($paquete['Foto'])): ?>
-                        <img src="../controllers/ImagenController.php?id=<?= $paquete['id_paquete'] ?>" alt="Imagen del Paquete" class="card-img-top">
+                        <img src="<?php echo BASE_URL; ?>controllers/ImagenController.php?id=<?= $paquete['id_paquete'] ?>" alt="Imagen del Paquete" class="card-img-top">
                     <?php else: ?>
                         <img src="<?php echo BASE_URL; ?>public/images/paquete-bro.jpg" alt="Imagen Predeterminada" class="card-img-top">
                     <?php endif; ?>
@@ -165,7 +177,7 @@
                             </p>
                         </div>
                         <div class="card-footer">
-                            <a href="../config/routes.php?controller=paquete&action=verPaquete&id_paquete=<?php echo $paquete['id_paquete']; ?>"><button type="button" class="btn btn-success">Ver itinerario</button></a>
+                            <a href="<?php echo BASE_URL; ?>paquete/verPaquete/<?php echo $paquete['id_paquete']; ?>"><button type="button" class="btn btn-success">Ver itinerario</button></a>
                         </div>
                     </div>
                 </div>
@@ -191,3 +203,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>
 </html>
+<?php
+  ob_end_flush(); // Envía la salida acumulada
+?>

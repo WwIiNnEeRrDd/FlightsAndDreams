@@ -22,7 +22,7 @@ CREATE TABLE Paquete (
     Foto LONGBLOB,
     Fecha_inicio DATE,
     Fecha_final DATE,
-    servicio ENUM('autobuses', 'hoteles', 'cruceros', 'trenes', 'vuelos') NOT NULL NOT NULL,
+    servicio ENUM('autobuses', 'hoteles', 'cruceros', 'trenes', 'vuelos') NOT NULL,
     itinerario TEXT
 );
 

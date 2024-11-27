@@ -19,7 +19,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Figtree:ital,wght@0,300..900;1,300..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
     <!-- CSS -->
-    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="<?php echo BASE_URL; ?>public/css/style.css">
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
     <!-- Iconos: Font-Awesome -->
@@ -46,7 +46,7 @@
           <img src="https://bostonglobe-prod.cdn.arcpublishing.com/resizer/v2/NVP4VSMGZ5RJKHAKLCJT5HXVCY.jpg?auth=97178dab0fad114204e6ad387a7d87fdaa4df37114f6f2a494c760d42a9706fd&width=1440" class="d-block w-100 h-30" alt="..." />
         </div>
         <div class="carousel-item">
-          <img src="../public/images/crucero.jpeg" class="d-block w-100 h-30" alt="..." />
+          <img src="<?php echo BASE_URL; ?>public/images/crucero.jpeg" class="d-block w-100 h-30" alt="..." />
         </div>
       </div>
       <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
@@ -66,47 +66,47 @@
 
       <div class="d-flex gap-3 mt-5 mb-5">
         <div class="custom-card">
-          <img class="" src="./images/vuelo-card.jpg" alt="">
+          <img class="" src="<?php echo BASE_URL; ?>public/images/vuelo-card.jpg" alt="">
           <div class="card-content">
             <h2>Vuelos</h2>
             <p>¿Buscas una nueva aventura?. ¡Aquí te tenemos los vuelos! ¡Lo que buscas está aqui!</p>
-            <a href="<?php echo BASE_URL; ?>config/routes.php?controller=paquete&action=listarPorServicio&servicio=vuelos" class="button">Ver más</a>
+            <a href="<?php echo BASE_URL; ?>paquetes/listarPorServicio/vuelos" class="button">Ver más</a>
           </div>
         </div>
 
         <div class="custom-card">
-          <img class="" src="./images/autobus-card.jpg" alt="">
+          <img class="" src="<?php echo BASE_URL; ?>public/images/autobus-card.jpg" alt="">
           <div class="card-content">
             <h2>Autobuses</h2>
-            <p>Viaja comodamente en nuestro servicio de autobuses. Sientete seguro con nuestro sistema de viajes.</p>
-            <a href="<?php echo BASE_URL; ?>config/routes.php?controller=paquete&action=listarPorServicio&servicio=autobuses" class="button">Ver más</a>
+            <p>Viaja comodamente en nuestro servicio de autobuses.</p>
+            <a href="<?php echo BASE_URL; ?>paquetes/listarPorServicio/autobuses" class="button">Ver más</a>
           </div>
         </div>
 
         <div class="custom-card">
-          <img class="" src="./images/hotel-card.jpg" alt="">
+          <img class="" src="<?php echo BASE_URL; ?>public/images/hotel-card.jpg" alt="">
           <div class="card-content">
             <h2>Hoteles</h2>
             <p>¿Buscando donde hospedarte? No dudes más, ¡te brindamos diversidades de lugares!</p>
-            <a href="<?php echo BASE_URL; ?>config/routes.php?controller=paquete&action=listarPorServicio&servicio=hoteles" class="button">Ver más</a>
+            <a href="<?php echo BASE_URL; ?>paquetes/listarPorServicio/hoteles" class="button">Ver más</a>
           </div>
         </div>
 
         <div class="custom-card">
-          <img class="" src="./images/crucero-card.webp" alt="">
+          <img class="" src="<?php echo BASE_URL; ?>public/images/crucero-card.webp" alt="">
           <div class="card-content">
             <h2>Cruceros</h2>
-            <p>Viaja por el mar, conociendo nuevos destinos. ¡Los cruceros te darán una nueva experiencia!</p>
-            <a href="<?php echo BASE_URL; ?>config/routes.php?controller=paquete&action=listarPorServicio&servicio=cruceros" class="button">Ver más</a>
+            <p>Viaja por el mar, conociendo nuevos destinos.</p>
+            <a href="<?php echo BASE_URL; ?>paquetes/listarPorServicio/cruceros" class="button">Ver más</a>
           </div>
         </div>
 
         <div class="custom-card">
-          <img class="" src="./images/trenes.jpg" alt="">
+          <img class="" src="<?php echo BASE_URL; ?>public/images/trenes.jpg" alt="">
           <div class="card-content">
             <h2>Trenes</h2>
-            <p>Disfruta de lo mejor viajando en tren. Desde clases premium hasta económicas. ¡Lo que buscas está aqui!</p>
-            <a href="<?php echo BASE_URL; ?>config/routes.php?controller=paquete&action=listarPorServicio&servicio=trenes" class="button">Ver más</a>
+            <p>Disfruta de lo mejor viajando en tren. Desde clases premium hasta económicas.</p>
+            <a href="<?php echo BASE_URL; ?>paquetes/listarPorServicio/trenes" class="button">Ver más</a>
           </div>
         </div>
       </div>
@@ -134,7 +134,7 @@
                       
                     <?php if (!empty($paquete['Foto'])): ?>
                       <div class="">
-                        <img class="card-img-top" src="../controllers/ImagenController.php?id=<?= $paquete['id_paquete'] ?>" alt="Imagen del Paquete">
+                        <img class="card-img-top" src="<?php echo BASE_URL; ?>controllers/ImagenController.php?id=<?= $paquete['id_paquete'] ?>" alt="Imagen del Paquete">
                       </div>
                     <?php else: ?>
                       <div class="">
@@ -154,7 +154,7 @@
                             </p>
                         </div>
                         <div class="card-footer">
-                            <a href="../config/routes.php?controller=paquete&action=verPaquete&id_paquete=<?php echo $paquete['id_paquete']; ?>"><button type="button" class="btn btn-success">Ver itinerario</button></a>
+                            <a href="<?php echo BASE_URL; ?>paquetes/verPaquete/<?php echo $paquete['id_paquete']; ?>"><button type="button" class="btn btn-success">Ver itinerario</button></a>
                         </div>
                     </div>
                 </div>
@@ -171,7 +171,7 @@
       <?php else: ?>
           <p>No hay paquetes registrados.</p>
       <?php endif; ?>
-      <a href="<?php echo BASE_URL; ?>config/routes.php?controller=paquete&action=listar">
+      <a href="<?php echo BASE_URL; ?>paquetes/listar">
         <button class="button mt-3">Ver todos los paquetes</button>
       </a>
     </section>
@@ -184,46 +184,46 @@
 
       <div class="d-flex gap-3 mt-5 mb-5">
         <div class="custom-card">
-          <img class="" src="./images/paris.jpg" alt="">
+          <img class="" src="<?php echo BASE_URL; ?>public/images/paris.jpg" alt="">
           <div class="card-content">
             <h2>París</h2>
-            <p>Descubre la ciudad del amor y su icónica Torre Eiffel, los románticos paseos por el Sena y la exquisita gastronomía francesa.</p>
+            <p>Descubre la ciudad del amor y su icónica Torre Eiffel.</p>
             <a href="https://www.paris.es/" class="button">Ver más</a>
           </div>
         </div>
 
         <div class="custom-card">
-          <img class="" src="./images/roma.jpg" alt="">
+          <img class="" src="<?php echo BASE_URL; ?>public/images/roma.jpg" alt="">
           <div class="card-content">
             <h2>Roma</h2>
-            <p>Explora la cuna del Imperio Romano, desde el majestuoso Coliseo hasta la imponente Basílica de San Pedro en el Vaticano.</p>
+            <p>Explora la cuna del Imperio Romano, desde el majestuoso Coliseo hasta la Basílica.</p>
             <a href="https://www.italia.it/es/lacio/roma/guia-historia-curiosidadess" class="button">Ver más</a>
           </div>
         </div>
 
         <div class="custom-card">
-          <img class="" src="./images/tokio.webp" alt="">
+          <img class="" src="<?php echo BASE_URL; ?>public/images/tokio.webp" alt="">
           <div class="card-content">
             <h2>Tokio</h2>
-            <p>Una ciudad donde la tradición y la modernidad se encuentran. Visita sus templos, disfruta del sushi y experimenta su vibrante vida nocturna.</p>
+            <p>Una ciudad donde la tradición y la modernidad se encuentran.</p>
             <a href="https://japondesdejapon.com/turismo/tokio/" class="button">Ver más</a>
           </div>
         </div>
 
         <div class="custom-card">
-          <img class="" src="./images/sydney.jpeg" alt="">
+          <img class="" src="<?php echo BASE_URL; ?>public/images/sydney.jpeg" alt="">
           <div class="card-content">
             <h2>Sídney</h2>
-            <p>Admira la famosa Ópera de Sídney, relájate en Bondi Beach y explora los hermosos parques nacionales de Australia.</p>
+            <p>Admira la famosa Ópera de Sídney y explora los parques nacionales de Australia.</p>
             <a href="https://www.unsaltoaaustralia.com/sidney/" class="button">Ver más</a>
           </div>
         </div>
 
         <div class="custom-card">
-          <img class="" src="./images/zurich.webp" alt="">
+          <img class="" src="<?php echo BASE_URL; ?>public/images/zurich.webp" alt="">
           <div class="card-content">
             <h2>Zurich</h2>
-            <p>Experimenta el encanto de los Alpes suizos, disfruta de sus pintorescas calles y relájate con una taza de chocolate caliente.</p>
+            <p>Experimenta el encanto de los Alpes suizos y disfruta de sus pintorescas calles.</p>
             <a href="https://www.disfrutazurich.com/informacion-general" class="button">Ver más</a>
           </div>
         </div>

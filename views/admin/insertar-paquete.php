@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300..900&family=Inter:wght@100..900&display=swap" rel="stylesheet">
   <!-- CSS -->
-  <link rel="stylesheet" href="../../public/css/style.css">
+  <link rel="stylesheet" href="<?php echo BASE_URL; ?>public/css/style.css">
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <!-- Iconos: Font-Awesome -->
@@ -34,7 +34,18 @@
       <section class="mainContainerAdmin">
         <div class="paddingContentAdmin">
           <div class="">
-            <form method="POST" action="../../config/routes.php?controller=paquete&action=registrar" enctype="multipart/form-data">
+
+          <?php
+            // Verificar si la cookie existe y mostrar el mensaje
+            if (isset($_COOKIE['fecha_incorrecta_paquetes'])) {
+                echo "<p class='alert alert-danger'>" . $_COOKIE['fecha_incorrecta_paquetes'] . "</p>";
+
+                // Eliminar la cookie después de mostrar el mensaje
+                setcookie('fecha_incorrecta_paquetes', '', time() - 3600, '/'); // Eliminar la cookie inmediatamente
+            }
+          ?>
+
+            <form method="POST" action="<?php echo BASE_URL; ?>paquetes/registrar" enctype="multipart/form-data">
               <div>
                 <i class="fa-solid fa-box fa-2x row d-flex justify-content-center align-items-center"></i>
                 <h1 class="row d-flex justify-content-center align-items-center p-1">Insertar un nuevo paquete</h1>
@@ -168,7 +179,7 @@
                   class="btn btn-primary btn-lg" 
                   style="padding-left: 2.5rem; padding-right: 2.5rem"
                 >
-                  Registrar paquete
+                  Registrar Paquete
                 </button>
               </div>
             </form>

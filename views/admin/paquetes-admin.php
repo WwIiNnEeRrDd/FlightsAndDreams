@@ -18,7 +18,7 @@ verificarSesionAdmin();
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300..900&family=Inter:wght@100..900&display=swap" rel="stylesheet">
   <!-- CSS -->
-  <link rel="stylesheet" href="../public/css/style.css">
+  <link rel="stylesheet" href="<?php echo BASE_URL; ?>public/css/style.css">
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <!-- Iconos: Font-Awesome -->
@@ -37,18 +37,17 @@ verificarSesionAdmin();
           <div class="bg-primary text-white p-3 mb-3">
             <h5 class="m-0">Historial de Paquetes</h5>
           </div>
-          <form method="POST" action="../config/routes.php?controller=viajes&action=reservar">
             <div class="row gx-0 justify-content-center align-items-center">
               <div class="col-12">
 
                 <!-- Filtro de estado -->
                 <div class="d-flex justify-content-start mb-3">
-                    <a href="?controller=admin&action=listarAdmin&servicio=" class="btn btn-primary me-2">Ver Todas</a>
-                    <a href="?controller=admin&action=listarPorServicioAdmin&servicio=autobuses" class="btn btn-warning me-2">Autobuses</a>
-                    <a href="?controller=admin&action=listarPorServicioAdmin&servicio=hoteles" class="btn btn-success me-2">Hoteles</a>
-                    <a href="?controller=admin&action=listarPorServicioAdmin&servicio=cruceros" class="btn btn-primary me-2">Cruceros</a>
-                    <a href="?controller=admin&action=listarPorServicioAdmin&servicio=trenes" class="btn btn-warning me-2">Trenes</a>
-                    <a href="?controller=admin&action=listarPorServicioAdmin&servicio=vuelos" class="btn btn-success me-2">Vuelos</a>
+                    <a href="<?php echo BASE_URL; ?>admin/listarAdmin" class="btn btn-primary me-2">Ver Todas</a>
+                    <a href="<?php echo BASE_URL; ?>admin/listarPorServicioAdmin/autobuses" class="btn btn-warning me-2">Autobuses</a>
+                    <a href="<?php echo BASE_URL; ?>admin/listarPorServicioAdmin/hoteles" class="btn btn-success me-2">Hoteles</a>
+                    <a href="<?php echo BASE_URL; ?>admin/listarPorServicioAdmin/cruceros" class="btn btn-primary me-2">Cruceros</a>
+                    <a href="<?php echo BASE_URL; ?>admin/listarPorServicioAdmin/trenes" class="btn btn-warning me-2">Trenes</a>
+                    <a href="<?php echo BASE_URL; ?>admin/listarPorServicioAdmin/vuelos" class="btn btn-success me-2">Vuelos</a>
 
                 </div>
                 <div class="card mt-5">
@@ -66,6 +65,8 @@ verificarSesionAdmin();
                               <th class="text-center">Fecha Final</th>
                               <th class="text-center">Duracion</th>
                               <th class="text-center">Servicio</th>
+                              <th class="text-center">Modificar</th>
+                              <th class="text-center">Eliminar</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -87,6 +88,16 @@ verificarSesionAdmin();
                                 <td class="text-center"><?php echo htmlspecialchars($paquete['Fecha_final']); ?></td>
                                 <td class="text-center"><?php echo $duracion; ?> dias</td>
                                 <td class="text-center"><?php echo htmlspecialchars($paquete['servicio']); ?></td>
+                                <td class="text-center">
+                                    <form action="<?php echo BASE_URL . 'paquetes/mostrarFormularioActualizar/' . $paquete['id_paquete']; ?>" method="POST" class="d-inline">
+                                        <button type="submit" class="btn btn-primary btn-sm mt-1">Actualizar</button>
+                                    </form>
+                                </td>
+                                <td class="text-center">
+                                    <form action="<?php echo BASE_URL . 'paquetes/eliminarPaquete/' . $paquete['id_paquete']; ?>" method="POST" class="d-inline">
+                                        <button type="submit" class="btn btn-danger btn-sm mt-1">Eliminar</button>
+                                    </form>
+                                </td>
                             
                               </tr>
                             <?php endforeach; ?>
@@ -100,7 +111,6 @@ verificarSesionAdmin();
                 </div>
               </div>
             </div>
-          </form>
         </div>
       </section>
     </div>

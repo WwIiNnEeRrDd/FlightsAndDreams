@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300..900&family=Inter:wght@100..900&display=swap" rel="stylesheet">
   <!-- CSS -->
-  <link rel="stylesheet" href="../public/css/style.css">
+  <link rel="stylesheet" href="<?php echo BASE_URL; ?>public/css/style.css">
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <!-- Iconos: Font-Awesome -->
@@ -41,10 +41,10 @@
 
                 <!-- Filtro de estado -->
                 <div class="d-flex justify-content-start mb-3">
-                    <a href="?controller=admin&action=verReservasAdmin&estado=" class="btn btn-primary me-2">Ver Todas</a>
-                    <a href="?controller=admin&action=verReservasAdmin&estado=pendiente" class="btn btn-warning me-2">Pendientes</a>
-                    <a href="?controller=admin&action=verReservasAdmin&estado=confirmado" class="btn btn-success me-2">Confirmadas</a>
-                    <a href="?controller=admin&action=verReservasAdmin&estado=cancelado" class="btn btn-secondary">Canceladas</a>
+                    <a href="<?php echo BASE_URL; ?>admin/verReservasAdmin" class="btn btn-primary me-2">Ver Todas</a>
+                    <a href="<?php echo BASE_URL; ?>admin/verReservasAdmin/pendiente" class="btn btn-warning me-2">Pendientes</a>
+                    <a href="<?php echo BASE_URL; ?>admin/verReservasAdmin/confirmado" class="btn btn-success me-2">Confirmadas</a>
+                    <a href="<?php echo BASE_URL; ?>admin/verReservasAdmin/cancelado" class="btn btn-secondary">Canceladas</a>
                 </div>
                 <div class="card mt-5">
                   <div class="card-body">
@@ -74,7 +74,7 @@
                                 <td class="text-center"><?php echo htmlspecialchars($reserva['nombre_usuario']); ?></td>
                                 <td class="text-center"><?php echo htmlspecialchars($reserva['Correo']); ?></td>
                                 <td class="text-center"><?php echo htmlspecialchars($reserva['Telefono']); ?></td>
-                                <td class="text-center"><?php echo !empty($reserva['nombre_paquete']) ? htmlspecialchars($reserva['nombre_paquete']) : 'No disponible'; ?></td>
+                                <td class="text-center"><?php echo !empty($reserva['nombre_paquete']) ? htmlspecialchars($reserva['nombre_paquete']) : 'Formulario'; ?></td>
                                 <td class="text-center"><?php echo htmlspecialchars($reserva['servicio']); ?></td>
                                 <td class="text-center"><?php echo htmlspecialchars($reserva['destino_final']); ?></td>
                                 <td class="text-center"><?php echo htmlspecialchars($reserva['personas'] ?? 'Paquete'); ?></td>
@@ -86,7 +86,7 @@
                                 </td>
                                 <td class="text-center"><?php echo $reserva['visa'] === 0 ? 'no' : ($reserva['visa'] === 1 ? 'sí' : 'no'); ?></td>
                                 <td class="text-center">
-                                    <form action="../config/routes.php?controller=admin&action=actualizarEstado" method="POST" class="d-inline">
+                                    <form action="<?php echo BASE_URL; ?>admin/actualizarEstado" method="POST" class="d-inline">
                                         <select name="estado" id="estado" class="form-select form-select-sm d-inline w-auto">
                                             <option value="cancelado" <?= $reserva['estado'] == 'cancelado' ? 'selected' : '' ?>>Cancelado</option>
                                             <option value="confirmado" <?= $reserva['estado'] == 'confirmado' ? 'selected' : '' ?>>Confirmado</option>
