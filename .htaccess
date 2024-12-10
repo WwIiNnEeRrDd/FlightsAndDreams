@@ -1,0 +1,29 @@
+RewriteEngine On
+RewriteBase /
+
+# Redirect "/" to public/index.php
+RewriteRule ^$ inicio [L]
+
+RewriteRule ^inicio public/index.php [L]
+
+# Custom routing logic
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)$ config/routes.php?controller=$1&action=$2 [QSA,L]
+
+# Routes with additional parameters
+RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)$ config/routes.php?controller=$1&action=$2&id_paquete=$3 [QSA,L]
+RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)$ config/routes.php?controller=$1&action=$2&servicio=$3 [QSA,L]
+RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)$ config/routes.php?controller=$1&action=$2&estado=$3 [QSA,L]
+
+# Direct redirections for static routes
+RewriteRule ^sobrenosotros$ views/about-us/about-us.php [L]
+RewriteRule ^login$ views/usuarios/login.php [L]
+RewriteRule ^registrar$ views/usuarios/registrar.php [L]
+RewriteRule ^login-admin$ views/usuarios/login-admin.php [L]
+RewriteRule ^dashboard$ views/admin/dashboard.php [L]
+RewriteRule ^estadisticas$ views/admin/estadisticas.php [L]
+RewriteRule ^insertar-paquete$ views/admin/insertar-paquete.php [L]
+
+
+
